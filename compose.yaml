@@ -1,0 +1,14 @@
+services:
+  website:
+    image: nginx:latest
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
+    ports:
+      - 80:80
+  ngrok:
+    image: wernight/ngrok
+    ports:
+      - 4040:4040 # Ngrok web interface
+    env_file:
+      - .env
+    command: ngrok http website:80
